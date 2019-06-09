@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Wasin Thonkaew" />
+<meta name="viewport" content="width=device.width, initial-scale=1.0" />
+<h1 id="listening-to-changes-event-of-file-then-execute-a-command">Listening to changes event of file then execute a command</h1>
+<p>I often see in webdev ecosystem especially thing like <code>gulp</code> or other similar tools which often has configurations set to listen to changes event of several files, then do something. Most likely to process and produce output to be shown on local web server for quick debugging experience. So developers don't have to switch terminal tab to execute processing command, then switch back. Minimal time wasted.</p>
+<p>So today I think about it, did some research to find a solution that can be done the same on Linux system. What we need is <code>inotifywait</code>.</p>
+<p>Install it with</p>
+<pre><code>  sudo apt install inotifywait</code></pre>
+<p>Then let's say you want to execute <code>pandoc</code> command to convert input <code>.txt</code> file into <code>.html</code> whenever a target file is modified<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. We do it like this</p>
+<pre><code>  while inotifywait -e modify src/topic.txt || true; do pandoc src/topic.txt -o posts/topic.html; done</code></pre>
+<p>I need <code>|| true</code> to make it execute the command, not quit, and keep waiting for future events.</p>
+<p>That's it.</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://superuser.com/a/181543">inotifywait solution</a></li>
+<li><a href="https://superuser.com/questions/181517/how-to-execute-a-command-whenever-a-file-changes#comment1578098_181543">suggestion fix</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This approach is as part of what I did to create this post :)<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+<h1 id="author">Author</h1>
+<p>Copyright 2019 Wasin Thonkaew (wasin@abzi.co), 气包子 (Angry Baozi) <a href="https://abzi.co">abzi.co</a>.</p>
+<p>In case of reprinting, or to do anything with the article you're unsure of, please write me e-mail.</p>
+<p>Comments, or suggestions, please send me email.</p>
+<p><a href="../">Other similar posts</a></p>
+</body>
+</html>

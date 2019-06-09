@@ -1,0 +1,35 @@
+Listening to changes event of file then execute a command
+=========================================================
+
+I often see in webdev ecosystem especially thing like `gulp` or other similar tools which often
+has configurations set to listen to changes event of several files, then do something. Most likely
+to process and produce output to be shown on local web server for quick debugging experience. So
+developers don't have to switch terminal tab to execute processing command, then switch back.
+Minimal time wasted.
+
+So today I think about it, did some research to find a solution that can be done the same on Linux
+system. What we need is `inotifywait`.
+
+Install it with
+
+      sudo apt install inotifywait
+
+Then let's say you want to execute `pandoc` command to convert input `.txt` file into `.html` whenever
+a target file is modified[^1]. We do it like this
+
+      while inotifywait -e modify src/topic.txt || true; do pandoc src/topic.txt -o posts/topic.html; done
+
+I need `|| true` to make it execute the command, not quit, and keep waiting for future events.
+
+That's it.
+
+References
+==========
+
+- [inotifywait solution]
+- [suggestion fix]
+
+[inotifywait solution]: https://superuser.com/a/181543
+[suggestion fix]: https://superuser.com/questions/181517/how-to-execute-a-command-whenever-a-file-changes#comment1578098_181543
+
+[^1]: This approach is as part of what I did to create this post :)

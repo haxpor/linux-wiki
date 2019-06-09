@@ -1,0 +1,8 @@
+% Index page listing all other posts
+% Wasin Thonkaew
+% June 10 2019
+
+Linux Wiki - All Posts
+========================
+
+* Listening to changes event of file then execute a command - [Read Here](posts/inotifywait.html)
