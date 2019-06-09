@@ -18,7 +18,7 @@
 <pre><code>  sudo apt install inotifywait</code></pre>
 <p>Then let's say you want to execute <code>pandoc</code> command to convert input <code>.txt</code> file into <code>.html</code> whenever a target file is modified<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. We do it like this</p>
 <pre><code>  while inotifywait -e modify src/topic.txt || true; do pandoc src/topic.txt -o posts/topic.html; done</code></pre>
-<p>I need <code>|| true</code> to make it execute the command, not quit, and keep waiting for future events.</p>
+<p>I need <code>|| true</code> to make it executes the command, not quit, and keep waiting for future events.</p>
 <p>That's it.</p>
 <h1 id="references">References</h1>
 <ul>

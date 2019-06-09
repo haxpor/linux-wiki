@@ -19,7 +19,7 @@ a target file is modified[^1]. We do it like this
 
       while inotifywait -e modify src/topic.txt || true; do pandoc src/topic.txt -o posts/topic.html; done
 
-I need `|| true` to make it execute the command, not quit, and keep waiting for future events.
+I need `|| true` to make it executes the command, not quit, and keep waiting for future events.
 
 That's it.
 
